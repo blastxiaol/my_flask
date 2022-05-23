@@ -1,15 +1,20 @@
-from flask import Flask
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
 
-@app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
+@app.route('/',methods=['GET','POST'])    #获取表单（模板）并渲染
+def index():
+    if(request.method=='GET'):
+        return render_template('index.html')
+    elif(request.method=='POST'):
+        name=request.form.get("name")
+        password=request.form.get("key")
 
-@app.route('/route')
-def hey():
-    return "Hey"
+        print(name,password)
+        return "Get the post"
+
+
 
 
 if __name__ == '__main__':
